@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "cn.com.hawkeye.device";
+option java_outer_classname = "DeviceManagerProto";
+option objc_class_prefix = "HLW";
+
+package device;
+
+service DeviceManager {
+  //register
+  rpc registerToServer (ClientInfo) returns (stream Message) {}
+  //send message
+  rpc sendMsg(Message) returns (ErrorInfo) {}
+
+}
+message ClientInfo {
+	string clientId = 1;
+}
+
+message Message {
+    int32 msgId = 1;
+    string receiver = 2;  //msg receiver
+    string content = 3;  //msg content
+}
+
+message ErrorInfo {
+	int32 code = 1;
+	string msg = 2;
+}
